@@ -46,6 +46,8 @@ def gnssInput(vio_session):
         coordinates.latitude = gnss["latitude"]
         coordinates.longitude = gnss["longitude"]
         coordinates.altitude = gnss["altitude"]
+        global rtkState
+        rtkState = gnss.get("fixSolution")  # is there a way to implement this with existing methods instead of a global var?
         enuPositionCovariance =  gnss.get("enuPositionCovariance")
         if not enuPositionCovariance:
             horizontalStddev = gnss["accuracy"]
@@ -83,6 +85,7 @@ with depthai.Device(pipeline) as device, \
         out = vio_session.waitForOutput()
         if out.globalPose:
             coords = out.globalPose.coordinates
-            print("Global position: " + str(coords.latitude) + ", " + str(coords.longitude))
+            rtkPrint = "; RTK solution: {}".format(rtkState) if rtkState else ""
+            print("Global position: " + str(coords.latitude) + ", " + str(coords.longitude) + rtkPrint)
         else:
             print("No global position yet, local pose: " + out.asJson())
