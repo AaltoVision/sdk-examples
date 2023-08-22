@@ -1,3 +1,6 @@
+**Fork adds the functionality to output data related to the state of the RTK fix.** This functionality is required by [`vio-gnss-recorder`](https://github.com/AaltoVision/vio-gnss-recorder). 
+
+
 # Spectacular AI SDK examples
 
 ![Spatial AI](https://spectacularai.github.io/docs/gif/spatial-ai.gif)
