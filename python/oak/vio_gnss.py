@@ -69,6 +69,9 @@ def gnssInput(vio_session):
 pipeline = depthai.Pipeline()
 config = spectacularAI.depthai.Configuration()
 
+config.internalParameters = {"useAbsolutePosePrior": "True", "absolutePosePriorUncertaintyFactor": "1.0", "useGnssVioFusion": "False", "gnssUncertaintyFactor": "0.002"}
+config.useSlam = True
+
 if len(sys.argv) >= 2: config.recordingFolder = sys.argv[1]
 
 # Optional imuToGnss translation in meters
